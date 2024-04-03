@@ -1,0 +1,5 @@
+com\fabrik\test\demo\controller\api.class
+com\fabrik\test\demo\DemoApplication.class
+com\fabrik\test\demo\RestTemplateConfig.class
+com\fabrik\test\demo\service\FabrickService.class
+com\fabrik\test\demo\entities\SaldoResponse.class
