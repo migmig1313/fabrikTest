@@ -10,12 +10,11 @@ import java.util.Date;
 @ToString
 @Getter
 @Setter
-public class Payload implements Serializable {
+public class Payload {
 
-    public String date;
-    public float balance;
-    public float availableBalance;
-
-    public String currency;
+    private String date;
+    private Double balance;
+    private Double availableBalance;
+    private String currency;
 
 }

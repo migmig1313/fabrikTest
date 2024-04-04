@@ -1,1 +1,3 @@
 com\fabrik\test\demo\DemoApplicationTests.class
+com\fabrik\test\demo\service\FabrickServiceTest.class
+com\fabrik\test\demo\controller\ApiControllerTest.class
