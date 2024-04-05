@@ -5,6 +5,7 @@ import com.fabrik.test.demo.model.GenericResponse;
 import com.fabrik.test.demo.model.effettuaBonificoRequest.MoneyTransferRequest;
 import com.fabrik.test.demo.model.effettuaBonificoResponse.MoneyTransferResponse;
 import com.fabrik.test.demo.model.getSaldoResponse.SaldoResponse;
+import com.fabrik.test.demo.model.listaTransazioni.response.ListaTransazioniResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -105,5 +106,34 @@ public class FabrickService {
             throw new AccountException(e.getMessage());
         }
         return new GenericResponse("200", null, response.getBody().getPayload());
+    }
+
+    public ListaTransazioniResponse getAccountTransactionsUtente(HttpHeaders headers, Long accountId, String fromAccountingDate, String toAccountingDate) throws AccountException {
+
+
+        String url = baseUrl + "/api/gbs/banking/v4.0/accounts/{accountId}/transactions[?<uriQuery>]";
+        //String accountId = "14537780";
+        String queryString = "fromAccountingDate=" + fromAccountingDate + "&toAccountingDate=" + toAccountingDate;
+        url = url.replace("{accountId}", String.valueOf(accountId))
+                .replace("[?<uriQuery>]", "?" + queryString);
+/*
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Auth-Schema", "S2S");
+        headers.set("Api-Key", "FXOVVXXHVCPVPBZXIJOBGUGSKHDNFRRQJP");
+*/
+        ResponseEntity<ListaTransazioniResponse> response = null;
+        try {
+            logger.info("chiamata url esterna GET");
+            response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), ListaTransazioniResponse.class, accountId, headers, fromAccountingDate, toAccountingDate);
+        } catch (HttpStatusCodeException e) {
+            logger.error("Errore durante la chiamata all'API di Fabrick: {}", e.getMessage());
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            return response.getBody();
+        } catch (Exception e) {
+            throw new AccountException(e.getMessage());
+        }
+        return response.getBody();
     }
 }

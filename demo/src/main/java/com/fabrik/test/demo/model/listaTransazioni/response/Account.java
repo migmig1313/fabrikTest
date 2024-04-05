@@ -1,4 +1,4 @@
-package com.fabrik.test.demo.model.listaTransazioni;
+package com.fabrik.test.demo.model.listaTransazioni.response;
 
 import lombok.Getter;
 import lombok.Setter;

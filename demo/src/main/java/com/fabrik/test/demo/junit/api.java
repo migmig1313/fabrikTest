@@ -1,4 +1,4 @@
-package com.fabrik.test.demo.controller;
+package com.fabrik.test.demo.junit;
 
 import com.fabrik.test.demo.exceptions.AccountException;
 import com.fabrik.test.demo.model.GenericResponse;
